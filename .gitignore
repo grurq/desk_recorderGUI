@@ -1,1 +1,7 @@
+/build/
+/__pycache__/
+/.vscode /
 *.spec
+*.mp3
+*.wav
+ffmpeg.exe
