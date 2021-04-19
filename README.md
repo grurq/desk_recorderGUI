@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿### deskrecorder | by grurq (c)2021-
 ([grurqApps](https://grurq.github.io/) 最終更新:2021-04-04)  
 pythonで作られた、デスクトップで流れている音声を.wav形式で予約録音できるソフトウェアです。  
@@ -67,3 +68,6 @@ SHA256: ab35a6b6186fb5d9131a75e8d7173e9a56de24db4140ec6567c69948c1380b63
 > 作者または著作権者は、契約行為、不法行為、またはそれ以外であろうと、ソフトウェアに起因または関連し、あるいはソフトウェアの使用またはその他の扱いによって生じる一切の請求、損害、その他の義務について何らの責任も負わないものとします。   
 > <https://licenses.opensource.jp/>  
 > <https://opensource.org/licenses/mit-license.php>  
+=======
+# desk_recorderGUI
+>>>>>>> a8e0722 (Initial commit)
