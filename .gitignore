@@ -1,16 +1,13 @@
-<<<<<<< HEAD
-/build/
-/__pycache__/
-/.vscode /
-*.spec
-*.mp3
-*.wav
-ffmpeg.exe
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
 *.py[cod]
 *$py.class
+
+# data
+exe/
+*.wav
+*.mp3
 
 # C extensions
 *.so
@@ -136,4 +133,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> a8e0722 (Initial commit)
