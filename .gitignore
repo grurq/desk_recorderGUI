@@ -1,13 +1,16 @@
+# desk_recorderGUI
+dailyreport.txt
+ffmpeg.exe
+exe/
+*.wav
+*.mp3
+*.exe
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
 *.py[cod]
 *$py.class
-
-# data
-exe/
-*.wav
-*.mp3
 
 # C extensions
 *.so

@@ -156,7 +156,7 @@ def rec(sec,dts):
     song.writeframes(b"".join(music))
     song.close()
     
-    if mp3==True:
+    if mp3==True and os.path.exists(SCRIPTPATH+'\\ffmpeg.exe'):
         subprocess.run(SCRIPTPATH+'\\ffmpeg.exe -i '+dts+'.wav '+dts+'.mp3',shell=True)
         os.remove(dts+'.wav')
     flg+=1
