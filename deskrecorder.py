@@ -12,6 +12,7 @@ import os
 import os.path
 import subprocess
 import schedule
+import shutil
 
 import blessed
 term = blessed.Terminal()
@@ -32,7 +33,8 @@ mes=''
 def getobj(obj):
     global mes
     mes=obj
-
+def quoted(words):
+    return '\"'+words+'\"'
 class mes:
     docs=''
     bar=0
@@ -131,11 +133,9 @@ def rec(sec,dts):
     dts=dts[:dts.find('.')]
     dts=re.sub('\:|\.','',dts)
     dts=re.sub(' ','_',dts)
-
-
-
     dt=str(dt)
     dt=dt[:dt.find('.')]
+
     mes.print('録音中です。終了時刻：'+dt)
     music=[]
     mes.bar=0
@@ -144,11 +144,18 @@ def rec(sec,dts):
             mes.tick('録音中：')
         data = stream.read(CHUNK)
         music.append(data)
-    
     stream.stop_stream()
     stream.close()
     p.terminate()
-    os.chdir(savepath)
+
+    while 1:
+        workdir=str(random.randint(10000000000,99999999999))[1:]
+        if os.path.exists('c:\\'+workdir)==False:
+            workdir='c:\\'+workdir
+            break
+    os.mkdir(workdir)
+    os.chdir(workdir)
+
     song=wave.open(dts+'.wav','wb')
     song.setnchannels(1)
     song.setsampwidth(p.get_sample_size(pyaudio.paInt16))
@@ -156,11 +163,26 @@ def rec(sec,dts):
     song.writeframes(b"".join(music))
     song.close()
     
+    savesuff='.wav'
     if mp3==True and os.path.exists(SCRIPTPATH+'\\ffmpeg.exe'):
         subprocess.run(SCRIPTPATH+'\\ffmpeg.exe -i '+dts+'.wav '+dts+'.mp3',shell=True)
         os.remove(dts+'.wav')
+        savesuff='.mp3'
     flg+=1
+    title=dts
+    overlapped=1
+    while os.path.exists(savepath+'\\'+title+savesuff)==True:
+        title=dts+' ('+str(overlapped)+')'
+        overlapped+=1
+    
+    shutil.move(workdir+'\\'+dts+savesuff,savepath+'\\'+title+savesuff)
+    os.chdir(quoted(savepath))
+    shutil.rmtree(quoted(workdir))
+
+    
+
     return schedule.CancelJob
+
 def main():
     global mes
     global SCRIPTPATH
