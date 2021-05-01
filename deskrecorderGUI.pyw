@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import pyaudio
+import codecs
 
 import tkinter as tk
 from tkinter import messagebox
@@ -24,21 +25,24 @@ class mikeset:
         self.name = name
 def test(root):
     root.print(root,'test')
-
+def sjis_to_utf8(words):
+    pass
 
 def getmike(mikes):
     soundin = pyaudio.PyAudio()
-    thisname=''
     p=pyaudio.PyAudio()
     for i in range(0, soundin.get_device_count()): 
-        thisname=soundin.get_device_info_by_index(i).get('name')
+        try:
+            thisname=soundin.get_device_info_by_index(i).get('name').decode('shift-jis')
+        except:
+            thisname=soundin.get_device_info_by_index(i).get('name')
         try:
             stream=p.open(format=pyaudio.paInt16,channels=1,rate=HZ,input=True,input_device_index = i,frames_per_buffer=CHUNK)
         except OSError:
             pass
         else:
             mikes.append(mikeset(i,thisname))
-            mikes[i].name=mikes[i].name.decode('sjis')
+            mikes[i].name=mikes[i].name
             stream.close()
     p.terminate()
 
@@ -103,7 +107,7 @@ def fm1():
     mikerb=[]
     getmike(mikes)
     for i in range(len(mikes)):
-        mikename.append(str(mikes[i].id)+': '+mikes[i].name)
+        mikename.append(str(mikes[i].id)+': '+str(mikes[i].name))
         mikerb.append('')
 
     # 0:絶対パス
