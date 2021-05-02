@@ -25,8 +25,9 @@ class mikeset:
         self.name = name
 def test(root):
     root.print(root,'test')
-def sjis_to_utf8(words):
-    pass
+
+def quoted(words):
+    return '\"'+words+'\"'
 
 def getmike(mikes):
     soundin = pyaudio.PyAudio()
@@ -74,6 +75,7 @@ def showcom(args,e):
     var=getcom(args)
 
     var[0]=var[0].replace('\\\\','\\')
+    var[0]=quoted(var[0])
     var[6]="\""+var[6]+"\""
 
     for i in range(1,len(var)):
